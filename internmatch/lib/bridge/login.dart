@@ -39,20 +39,20 @@ class GetKeycloakSetting extends State<Login>{
   Widget build(BuildContext context) {
   if (_url == null) {
             // This is what we show while we're loading
-            return new Container();
-            print(_url);
+            return new Scaffold(
+              appBar: new AppBar(
+                title : new Text("Loading...."), 
+              )
+            );
         }
-        else{
-    return MaterialApp(
-      routes: {
-        "/":(_) => new WebviewScaffold(
-          url: _url,
-          appBar: new AppBar(
-            title: new Text("Login"),
-          ),
-        ),
-      }
-    );
+          else{
+              return MaterialApp(
+                routes: {
+                  "/":(_) => new WebviewScaffold(
+                    url: _url,
+                  ),
+                }
+              );
     }
   }
 
