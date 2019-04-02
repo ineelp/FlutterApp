@@ -4,6 +4,8 @@ import 'dart:async';
 import 'dart:convert';
 import '../weeklyJournal/home.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import '../models/student.dart';
+import '../utils/database_helper.dart';
 
 
 class Login extends StatefulWidget{
@@ -13,13 +15,30 @@ class Login extends StatefulWidget{
 
 class KeycloakSetting {
   var _token;
+
+  String get token{
+    return _token;
+  }
+
   var _url;
+  String get url{
+    return _url;
+  }
+
   var _bridgeSettings;
+  Map get bridgeSettings{
+    return _bridgeSettings;
+  }
   var _realmParam;
+  Map get realmParam{
+    return _realmParam;
+  }
 }
 
 class KeycloakLogin extends State<Login>{
 
+// pass token variable in constructor 
+int saveToken;
   var _flutterWebviewPlugin = new FlutterWebviewPlugin();
   KeycloakSetting keycloakSetting = new KeycloakSetting();
 
@@ -56,10 +75,28 @@ class KeycloakLogin extends State<Login>{
             print("Found Token: saving .....");
             print("token: "+ token);
             keycloakSetting._token = token ;
-            navigateHome();
+
+            setState(() {
+                storeInDB(keycloakSetting._token);
+                navigateHome();
+            });
           }
         });
   }
+
+
+    void storeInDB(String token) async {
+
+      var db = new DatabaseHelper();  
+      saveToken = await db.saveToken(new Student("$token"));
+      print("Token entered  $saveToken into Student Table.");
+    } 
+
+      void fetchTokenFromDB() async{
+        var db = new DatabaseHelper();  
+        Student tokenDB = await db.getToken(1);
+        print("Token from DB: ${tokenDB.token}");
+    }
 
 /* runthis method to fetch all the envs. Will be used at some point in future */
   void fetchEnvs(){

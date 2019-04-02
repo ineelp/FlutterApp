@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
             child: new Column(
               children: <Widget>[
                 Padding(padding: new EdgeInsets.all(20.5)),
-                new Text("Token: $keycloakSetting._token",
+                new Text("Token: ${keycloakSetting.token}",
                 style: new TextStyle(
                   fontWeight: FontWeight.w700,
                   color: Colors.lightBlue[600],
