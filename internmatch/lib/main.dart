@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import './bridge/login.dart';
-import 'dart:async';
+import './startapp.dart';
+
 void main() async{
   runApp(new MaterialApp(
-    title: "Login",
-    home: new Login(),
+    title: "Internmatch",
+    /*Run the app*/
+    home: new StartApp(),
   ));
-
 }

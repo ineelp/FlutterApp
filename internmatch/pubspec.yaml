@@ -49,6 +49,7 @@ flutter:
   assets:
     - images/logo.png
     - images/background_img.jpg
+    - images/internmatch_logo.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
