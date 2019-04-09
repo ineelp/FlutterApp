@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../get_envs/login.dart';
-
+import '../utils/event_helper.dart';
 
 class Home extends StatelessWidget { 
 
    final KeycloakSetting keycloakSetting;
+   final eventHelper = new EventHelper();
 
    Home({Key key, @required this.keycloakSetting}): super(key:key);
 
@@ -23,6 +24,14 @@ class Home extends StatelessWidget {
                   color: Colors.lightBlue[600],
                   fontSize: 22.5
                 )),
+                new Padding(padding: const EdgeInsets.all(12.8),),
+                new FlatButton(
+                  onPressed: (){
+                      eventHelper.sendButtonEvent( 'BTN_CLK_EVENT',{'value':{'itemCode' : 'Dummy_code'}});
+                      print("Trying to connect with Backend!");
+                  },
+                  child: Text("Connect with Backend!"),
+                )
               ],
             ),
           ),

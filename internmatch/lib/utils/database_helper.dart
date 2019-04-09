@@ -20,6 +20,7 @@ class DatabaseHelper{
   static Database _db;
 
   Future<Database> get db async{
+
     if(_db != null){
 
       return _db;
@@ -32,6 +33,7 @@ class DatabaseHelper{
   DatabaseHelper.internal();
 
   initDb() async{
+
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentDirectory.path,"maindb.db"); //home://directory/files/maindb.db
 
@@ -42,6 +44,7 @@ class DatabaseHelper{
   }
 
   void _onCreate(Database db, int version) async{
+
     await db.execute(
       "CREATE TABLE $tableName($tokenId INTEGER PRIMARY KEY,$token TEXT)"
     );
@@ -52,18 +55,21 @@ class DatabaseHelper{
 //Insertion returns 1 or 0 i.e. Integer
 
 Future<int> saveToken(Student student) async{
+
     var dbClient = await db;
     int result = await dbClient.insert("$tableName", student.toMap());
     return result;
   }
 
 Future<int> getCount() async{
+
     var dbClient = await db;
     return Sqflite.firstIntValue(
       await dbClient.rawQuery("SELECT COUNT(*) FROM $tableName"));
 }
 
-Future<Student> getToken(int id) async{
+Future<Student> fetchTokenFromDb(int id) async{
+
     var dbClient = await db;
 
     var result = await dbClient.rawQuery("SELECT * FROM $tableName WHERE $tokenId = $id");
@@ -71,8 +77,38 @@ Future<Student> getToken(int id) async{
     if(result.length == 0) return null;
 
     return new Student.fromMap(result.first);
-
 }
+
+Future<List> getAllTokens() async{
+     var dbClient = await db;
+     var result = await dbClient.rawQuery("SELECT * FROM $tableName");
+     return result.toList();
+}
+
+Future<int> deleteTokenFromDB(int id) async{
+  var dbClient = await db;
+  return await dbClient.delete(tableName,
+  where: "$tokenId =?",whereArgs: [id]);
+}
+
+Future<int> updateToken(Student student) async{
+  var dbClient = await db;
+  return await dbClient.update(tableName,
+  student.toMap(), where: "$tokenId=?",whereArgs: [student.id]);
+}
+
+/*Future<String> getToken() async{
+
+    Student tokenDB = await fetchTokenFromDb(1);
+    if(tokenDB == null){
+        Student student = vertex.getToken();
+        saveToken(student);
+        return getToken();
+    }
+    return tokenDB.token;
+}*/
+     
+    
 
 Future close() async{
     var dbClient = await db;

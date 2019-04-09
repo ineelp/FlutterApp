@@ -66,7 +66,7 @@ int saveToken;
 
       /* listening to eny url change in the browser */
       _flutterWebviewPlugin.onUrlChanged.listen((String url){
-      
+          print("Reloading page and directing to "+ keycloakSetting._url);
           RegExp regExp = new RegExp("code=(.*)");
           String token = regExp.firstMatch(url)?.group(1);
 
@@ -94,7 +94,7 @@ int saveToken;
 
       void fetchTokenFromDB() async{
         var db = new DatabaseHelper();  
-        Student tokenDB = await db.getToken(1);
+        Student tokenDB = await db.fetchTokenFromDb(1);
         print("Token from DB: ${tokenDB.token}");
     }
 
