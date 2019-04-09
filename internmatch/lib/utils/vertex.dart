@@ -1,5 +1,7 @@
 import '../models/student.dart';
 import '../utils/database_helper.dart';
+import 'package:event_bus/event_bus.dart';
+
 
 class Vertex{
 
@@ -24,10 +26,11 @@ class Vertex{
     }
     
     openEventBus(url){
-      /*final eventBus = new EventBus( url );
+      var eventBus = new EventBus();
+      
       this.State['EventBus'] = eventBus;
-       this.State['EventBus'].onopen = this.handleEventBusOpen;
-       this.State['EventBus'].onclose = this.handleEventBusClose;*/
+      this.State['EventBus'].onopen = this.handleEventBusOpen;
+      this.State['EventBus'].onclose = this.handleEventBusClose;*/
     
     }
 
