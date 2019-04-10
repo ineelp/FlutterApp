@@ -23,9 +23,7 @@ class Student{
       map['id'] = _id;
     }
     return map;
-
   }
-
 
   Student.fromMap(Map<String,dynamic> map){
     this._token = map["token"];

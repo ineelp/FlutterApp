@@ -4,19 +4,8 @@ import '../models/event.dart';
 /*Event helper class any user event will first call method from this class*/
 class EventHelper{
 
-    EventHandler eventHandler = new EventHandler();
-
     sendCode(eventType,data){
-
       eventHandler.sendEvent(
-        event: SendCode,
-        sendWithToken: true,
-        eventType:null,
-        data:null);
-    }
-    
-    sendBtnCode(){
-      eventHandler.sendEvent(  
         event: sendCode,
         sendWithToken: true,
         eventType:null,

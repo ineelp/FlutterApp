@@ -77,7 +77,7 @@ int saveToken;
             keycloakSetting._token = token ;
 
             setState(() {
-                storeInDB(keycloakSetting._token);
+                //storeInDB(keycloakSetting._token);
                 navigateHome();
             });
           }

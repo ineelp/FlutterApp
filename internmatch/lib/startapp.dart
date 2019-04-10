@@ -14,14 +14,14 @@ class _StartAppState extends State<StartApp> {
 
   @override
   void initState(){
-    super.initState();
-
+  
      new Future.delayed(
-        const Duration(seconds: 10),
+        
+        const Duration(seconds: 5),
         () => Navigator.push(context, 
         MaterialPageRoute(builder: (context) => Login()),
-        ));
-  } 
+        )); 
+  }
 
   @override
   Widget build(BuildContext context) {
