@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import '../get_envs/login.dart';
 import '../utils/event_helper.dart';
 
 class Home extends StatelessWidget { 
 
-   final KeycloakSetting keycloakSetting;
+   var token ;
    final eventHelper = new EventHelper();
 
-   Home({Key key, @required this.keycloakSetting}): super(key:key);
+   Home({Key key, @required this.token}): super(key:key);
 
    @override
     Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class Home extends StatelessWidget {
             child: new Column(
               children: <Widget>[
                 Padding(padding: new EdgeInsets.all(20.5)),
-                new Text("Token: ${keycloakSetting.token}",
+                new Text("Token: $token",
                 style: new TextStyle(
                   fontWeight: FontWeight.w700,
                   color: Colors.lightBlue[600],

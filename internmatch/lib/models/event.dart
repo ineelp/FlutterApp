@@ -5,6 +5,8 @@ abstract class Event{
     var _token;
     var _items;
     var _dataType;
+
+ 
 }
 
 abstract class IncomingEvent extends Event{
@@ -13,7 +15,15 @@ abstract class IncomingEvent extends Event{
 }
 
 abstract class OutgoingEvent extends Event{
-    
+     message ()=> {
+       
+        'event_type': this._eventType,
+        'msg_type': this._msgType,
+        'token': this._token,
+        'data': this._data,
+        'items': this._items,
+        'data_type': this._dataType
+    };
 }
 
 /*Button CLick Event*/
@@ -49,13 +59,16 @@ class AnswerEvents extends OutgoingEvent{
 /*------------------------------------------------*/
 authInit(token) => new AuthInit(token);
 
+
 class AuthInit extends OutgoingEvent{
   
     AuthInit(token){
+      {
       this._eventType = 'AUTH_INIT';
       this._msgType = 'EVT_MSG';
       this._token = token;
       this._data = {'code' :'AUTH_INIT'};
+      }
     }
 }
 
@@ -73,7 +86,7 @@ class RedirectReturn extends OutgoingEvent{
     }
 }
 
-sendCode(eventType, data, token ) => new SendCode(eventType, data, token );
+sendCode(eventType, data, token ) => new SendCode(eventType, data, token ).message;
 
 class SendCode extends OutgoingEvent{
 
@@ -83,6 +96,8 @@ class SendCode extends OutgoingEvent{
       this._token = token;
       this._data = data;
     }
+
+    message () => {this._eventType };
 }
 
 logOut(eventType, data, token ) => LogOut(eventType, data, token );
@@ -119,14 +134,26 @@ cacheMissing ( beCode, token) => new CacheMissing ( beCode, token);
 
 class CacheMissing extends OutgoingEvent{
 
+      var _beCode;
       CacheMissing ( beCode, token) {
       this._eventType = 'EVT_CACHE_MISSING';
       this._msgType = 'EVT_MSG';
       this._token = token;
       this._data = null;
-      var targetBaseEntityCode = beCode;
+      var targetBaseEntityCode = this._beCode;
 
     }
+
+    message ()=> {
+       
+        'event_type': this._eventType,
+        'msg_type': this._msgType,
+        'token': this._token,
+        'data': this._data,
+        'items': this._items,
+        'data_type': this._dataType,
+        'targetBaseEntityCode': this._beCode
+    };
 }
 
 /*Form Submit*/

@@ -7,7 +7,7 @@ EventHandler eventHandler = new EventHandler();
 /* will be removed soon */
 class Settings{
 
-  static final vertexUrl = "https://bridge-internmatch.outcome-hub.com/frontend";
+  static final vertexUrl = "wss://bridge-internmatch.outcome-hub.com/frontend/asdas/asdasd/websocket";
   }
 
 class EventHandler{
@@ -23,7 +23,7 @@ class EventHandler{
         /* Initialize connection with vertex */
         socket.initCommunication(Settings.vertexUrl);
 
-        socket.addListener(handleIncomingMessage);
+//        socket.addListener(handleIncomingMessage);
     }
 
     String __getAccessToken(){
@@ -52,6 +52,11 @@ class EventHandler{
       Map message = json.decode(incomingMessage);
       //Neeed more to do 
       print (message);
+
+    }
+
+    main(){
+        socket.initCommunication(Settings.vertexUrl);
 
     }
 
