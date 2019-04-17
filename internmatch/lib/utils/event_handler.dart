@@ -4,12 +4,6 @@ import 'dart:convert';
 
 EventHandler eventHandler = new EventHandler();
 
-/* will be removed soon */
-class Settings{
-
-  static final vertexUrl = "wss://bridge-internmatch.outcome-hub.com/frontend/asdas/asdasd/websocket";
-  }
-
 class EventHandler{
 
     static final EventHandler _eventHandler = new EventHandler._internal();
@@ -18,12 +12,13 @@ class EventHandler{
       return _eventHandler;
     }
 
-    EventHandler._internal(){
 
-        /* Initialize connection with vertex */
-        socket.initCommunication(Settings.vertexUrl);
+    EventHandler._internal();
 
-//        socket.addListener(handleIncomingMessage);
+    initWebSocketConnection() async{
+      var vertexUrl = "https://bridge-internmatch.outcome-hub.com/frontend/websocket";
+      socket.initCommunication(vertexUrl);
+      //socket.initCommunication(BridgeEnvs.ENV_GENNY_BRIDGE_VERTEX);
     }
 
     String __getAccessToken(){
@@ -52,11 +47,6 @@ class EventHandler{
       Map message = json.decode(incomingMessage);
       //Neeed more to do 
       print (message);
-
-    }
-
-    main(){
-        socket.initCommunication(Settings.vertexUrl);
 
     }
 

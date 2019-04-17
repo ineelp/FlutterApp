@@ -9,9 +9,11 @@ import '../models/bridgeenvs.dart';
 import '../utils/database_helper.dart';
 
 
+
 class Login extends StatefulWidget{
   @override
   State createState() => new KeycloakLogin();
+
 }
 
 class KeycloakLogin extends State<Login>{
@@ -26,7 +28,7 @@ class KeycloakLogin extends State<Login>{
       fetchEnvs();
 
       print(BridgeEnvs.ENV_GENNY_BRIDGE_VERTEX);
-      print("Running Keycloack Login");    
+      print("Running Keycloack Login"); 
 
       getToken();
 
@@ -120,7 +122,7 @@ class KeycloakLogin extends State<Login>{
         /* getting json object from */
         makeApiRequest(apiUrl).then((data){
             print("made already");
-            
+
             /* Looping through and saving the necessary envs value */
             BridgeEnvs.map.forEach((key,val) => {
               print(key),
@@ -129,10 +131,8 @@ class KeycloakLogin extends State<Login>{
       });
     }
     
-
   /*getting settings url */
     Future<Map> makeApiRequest(final url) async{
-        
         http.Response response= await http.get(url);
         print(response.body);
         return json.decode(response.body);

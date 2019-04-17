@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import '../utils/event_helper.dart';
-
+import '../utils/event_handler.dart';
 class Home extends StatelessWidget { 
 
    var token ;
    final eventHelper = new EventHelper();
 
+    initState(){
+      eventHandler.initWebSocketConnection();
+    }
+    
    Home({Key key, @required this.token}): super(key:key);
 
    @override
